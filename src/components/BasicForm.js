@@ -1,59 +1,124 @@
-import { useState } from "react";
+import React from "react";
+import useInput from "./hook/use-input";
 
-const BasicForm = (props) => {
-  const [enterNameState, setEnterNamestate] = useState("");
-  const [enterLastNameState, setEnterLastNamestate] = useState("");
-  const [enterEmailState, setEnterEmailstate] = useState("");
+const BasicForm = () => {
+  //CODE_BEFORE_COSTUME_HOOK
 
-  const [enterNameBlurState, setEnterNameBlurstate] = useState(false);
-  const [enterLastNameBlurState, setEnterLastNameBlurstate] = useState(false);
-  const [enterEmailBlurState, setEnterEmailBlurstate] = useState(false);
+  // const [enterNameState, setEnterNamestate] = useState("");
+  // const [enterNameBlurState, setEnterNameBlurstate] = useState(false);
 
-  const enterNameIsValid = enterNameState.trim() !== "";
-  const nameInputIsInvalid = !enterNameIsValid && enterNameBlurState;
+  // const [enterLastNameState, setEnterLastNamestate] = useState("");
+  // const [enterLastNameBlurState, setEnterLastNameBlurstate] = useState(false);
 
-  const enterLastNameIsValid = enterLastNameState.trim() !== "";
-  const lastNameInputIsInvalid =
-    !enterLastNameIsValid && enterLastNameBlurState;
+  // const [enterEmailState, setEnterEmailstate] = useState("");
+  // const [enterEmailBlurState, setEnterEmailBlurstate] = useState(false);
 
-  const enterEmailIsValid = enterEmailState.trim().includes("@");
-  const emailInputIsInvalid = !enterEmailIsValid && enterEmailBlurState;
+  // const enterNameIsValid = enterNameState.trim() !== "";
+  // const nameInputIsInvalid = !enterNameIsValid && enterNameBlurState;
 
-  const inValidNameClasses = nameInputIsInvalid
-    ? "form-control invalid"
-    : "form-control";
+  // const enterLastNameIsValid = enterLastNameState.trim() !== "";
+  // const lastNameInputIsInvalid =
+  //   !enterLastNameIsValid && enterLastNameBlurState;
 
-  const inValidLastNameClasses = lastNameInputIsInvalid
-    ? "form-control invalid"
-    : "form-control";
+  // const enterEmailIsValid = enterEmailState.trim().includes("@");
+  // const emailInputIsInvalid = !enterEmailIsValid && enterEmailBlurState;
 
-  const inValidEmailClasses = emailInputIsInvalid
-    ? "form-control invalid"
-    : "form-control";
+  // const inValidNameClasses = nameInputIsInvalid
+  //   ? "form-control invalid"
+  //   : "form-control";
 
-  const enterNameHandler = (e) => {
-    setEnterNamestate(e.target.value);
-  };
+  // const inValidLastNameClasses = lastNameInputIsInvalid
+  //   ? "form-control invalid"
+  //   : "form-control";
 
-  const enterNameBlurHandler = () => {
-    setEnterNameBlurstate(true);
-  };
+  // const inValidEmailClasses = emailInputIsInvalid
+  //   ? "form-control invalid"
+  //   : "form-control";
 
-  const enterLastNameHandler = (e) => {
-    setEnterLastNamestate(e.target.value);
-  };
+  // const enterNameHandler = (e) => {
+  //   setEnterNamestate(e.target.value);
+  // };
 
-  const enterLastNameBlurHandler = () => {
-    setEnterLastNameBlurstate(true);
-  };
+  // const enterNameBlurHandler = () => {
+  //   setEnterNameBlurstate(true);
+  // };
 
-  const enterEmailHandler = (e) => {
-    setEnterEmailstate(e.target.value);
-  };
+  // const enterLastNameHandler = (e) => {
+  //   setEnterLastNamestate(e.target.value);
+  // };
 
-  const enterEmailBlurHandler = () => {
-    setEnterEmailBlurstate(true);
-  };
+  // const enterLastNameBlurHandler = () => {
+  //   setEnterLastNameBlurstate(true);
+  // };
+
+  // const enterEmailHandler = (e) => {
+  //   setEnterEmailstate(e.target.value);
+  // };
+
+  // const enterEmailBlurHandler = () => {
+  //   setEnterEmailBlurstate(true);
+  // };
+
+  // let formIsValid = false;
+
+  // if (enterNameState && enterEmailState && enterLastNameState) {
+  //   formIsValid = true;
+  // }
+
+  // const onValueSubmitHandler = (e) => {
+  //   e.preventDefault();
+
+  //   // setEnterNameBlurstate(true);
+  //   // setEnterEmailBlurstate(true);
+  //   // setEnterLastNameBlurstate(true);
+
+  //   if (!enterEmailIsValid || !enterLastNameIsValid || !enterNameIsValid) {
+  //     return;
+  //   }
+  //   // setEnterNamestate("");
+  //   // setEnterNameBlurstate(false);
+
+  //   // setEnterLastNamestate("");
+  //   // setEnterLastNameBlurstate(false);
+
+  //   // setEnterEmailstate("");
+  //   // setEnterEmailBlurstate(false);
+  // };
+
+  //CODE_AFTER_CUSTOME_HOOK
+
+  const {
+    valid: enterNameState,
+    isValid: enterNameIsValid,
+    inValid: nameInputIsInvalid,
+    inValidClasses: inValidNameClasses,
+    enterInputHandler: enterNameHandler,
+    enterInputBlurHandler: enterNameBlurHandler,
+    changeSetOfBlurHandler: nameBlurHandler,
+    resetState: resetNameState,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    valid: enterLastNameState,
+    isValid: enterLastNameIsValid,
+    inValid: lastNameInputIsInvalid,
+    inValidClasses: inValidLastNameClasses,
+    enterInputHandler: enterLastNameHandler,
+    enterInputBlurHandler: enterLastNameBlurHandler,
+    changeSetOfBlurHandler: lastNameBlurHandler,
+    resetState: resetLastNameState,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    valid: enterEmailState,
+    isValid: enterEmailIsValid,
+    inValid: emailInputIsInvalid,
+    inValidClasses: inValidEmailClasses,
+    enterInputHandler: enterEmailHandler,
+    enterInputBlurHandler: enterEmailBlurHandler,
+    changeSetOfBlurHandler: emailBlurHandler,
+    resetState: resetEmailState,
+  } = useInput((value) => value.trim().includes("@"));
 
   let formIsValid = false;
 
@@ -64,22 +129,17 @@ const BasicForm = (props) => {
   const onValueSubmitHandler = (e) => {
     e.preventDefault();
 
-    setEnterNameBlurstate(true);
-    setEnterEmailBlurstate(true);
-    setEnterLastNameBlurstate(true);
+    nameBlurHandler();
+    lastNameBlurHandler();
+    emailBlurHandler();
 
-    if (!enterEmailIsValid) {
+    if (!enterEmailIsValid || !enterLastNameIsValid || !enterNameIsValid) {
       return;
     }
 
-    setEnterNamestate("");
-    setEnterLastNamestate("");
-    setEnterEmailstate("");
-
-    setEnterNameBlurstate(false);
-    setEnterLastNameBlurstate(false);
-
-    setEnterEmailBlurstate(false);
+    resetNameState();
+    resetLastNameState();
+    resetEmailState();
   };
 
   return (
