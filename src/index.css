@@ -91,10 +91,10 @@ button:active {
 button:disabled,
 button:disabled:hover,
 button:disabled:active {
-  background-color: #343;
-  border-color: #343;
+  background-color: rgb(106, 109, 106);
+  border-color: rgb(106, 109, 106);
 
-  color: #010;
+  color: #000;
 }
 
 .form-actions {
